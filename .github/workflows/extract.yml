@@ -9,10 +9,10 @@ jobs:
 
     steps:
       - name: Install tools
-        run: sudo apt update && sudo apt install -y wget tar
+        run: sudo apt update && sudo apt install -y aria2c tar
 
       - name: Download Fastboot ROM
-        run: wget -O rom.tgz "https://hugeota.d.miui.com/V14.0.8.0.TKUINXM/selene_in_global_images_V14.0.8.0.TKUINXM_20240424.0000.00_13.0_in_a3773ba52e.tgz"
+        run: aria2c -x 16 -s 16 -o rom.tgz "https://hugeota.d.miui.com/V14.0.8.0.TKUINXM/selene_in_global_images_V14.0.8.0.TKUINXM_20240424.0000.00_13.0_in_a3773ba52e.tgz"
 
       - name: Extract ROM
         run: |

@@ -1,0 +1,27 @@
+name: Extract Boot Image
+
+on:
+  workflow_dispatch:
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install tools
+        run: sudo apt update && sudo apt install -y wget tar
+
+      - name: Download Fastboot ROM
+        run: wget -O rom.tgz "https://hugeota.d.miui.com/V14.0.8.0.TKUINXM/selene_in_global_images_V14.0.8.0.TKUINXM_20240424.0000.00_13.0_in_a3773ba52e.tgz"
+
+      - name: Extract ROM
+        run: |
+          tar -xvf rom.tgz
+          cd */images
+          ls
+
+      - name: Upload boot.img
+        uses: actions/upload-artifact@v4
+        with:
+          name: boot-image
+          path: "**/images/boot.img"
